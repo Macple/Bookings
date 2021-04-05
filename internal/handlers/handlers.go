@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Macple/Bookings/pkg/config"
-	"github.com/Macple/Bookings/pkg/models"
-	"github.com/Macple/Bookings/pkg/render"
+	"github.com/Macple/Bookings/internal/config"
+	"github.com/Macple/Bookings/internal/models"
+	"github.com/Macple/Bookings/internal/render"
 )
 
 // Repo a repository used by handlers

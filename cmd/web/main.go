@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Macple/Bookings/pkg/config"
-	"github.com/Macple/Bookings/pkg/handlers"
-	"github.com/Macple/Bookings/pkg/render"
+	"github.com/Macple/Bookings/internal/config"
+	"github.com/Macple/Bookings/internal/handlers"
+	"github.com/Macple/Bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
 )
 

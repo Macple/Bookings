@@ -10,8 +10,8 @@ import (
 
 	"github.com/justinas/nosurf"
 
-	"github.com/Macple/Bookings/pkg/config"
-	"github.com/Macple/Bookings/pkg/models"
+	"github.com/Macple/Bookings/internal/config"
+	"github.com/Macple/Bookings/internal/models"
 )
 
 var functions = template.FuncMap{}
