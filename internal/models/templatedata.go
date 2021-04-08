@@ -1,5 +1,9 @@
 package models
 
+import (
+	"github.com/Macple/Bookings/internal/forms"
+)
+
 // TemplateData holds data sent to templates
 type TemplateData struct {
 	StringMap map[string]string
@@ -9,5 +13,6 @@ type TemplateData struct {
 	CSRFToken string
 	Flash     string
 	Warning   string
-	Err       string
+	Error     string
+	Form      *forms.Form
 }

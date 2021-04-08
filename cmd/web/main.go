@@ -1,10 +1,13 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/Macple/Bookings/internal/models"
 
 	"github.com/Macple/Bookings/internal/config"
 	"github.com/Macple/Bookings/internal/handlers"
@@ -19,6 +22,8 @@ var session *scs.SessionManager
 
 // main is the main application function
 func main() {
+	// what can be put into the session
+	gob.Register(models.Reservation{})
 	// change this to true when in production
 	app.InProduction = false
 
