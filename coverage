@@ -1,12 +1,10 @@
 mode: set
-github.com/Macple/Bookings/cmd/web/middleware.go:9.53,10.71 1 1
-github.com/Macple/Bookings/cmd/web/middleware.go:10.71,13.3 1 0
-github.com/Macple/Bookings/cmd/web/middleware.go:17.45,28.2 3 1
-github.com/Macple/Bookings/cmd/web/middleware.go:31.50,33.2 1 1
-github.com/Macple/Bookings/cmd/web/routes.go:13.49,40.2 19 1
 github.com/Macple/Bookings/cmd/web/main.go:24.13,26.16 2 0
 github.com/Macple/Bookings/cmd/web/main.go:30.2,37.16 4 0
 github.com/Macple/Bookings/cmd/web/main.go:26.16,28.3 1 0
 github.com/Macple/Bookings/cmd/web/main.go:40.18,55.16 10 1
 github.com/Macple/Bookings/cmd/web/main.go:60.2,68.12 6 1
 github.com/Macple/Bookings/cmd/web/main.go:55.16,58.3 2 0
+github.com/Macple/Bookings/cmd/web/middleware.go:10.45,21.2 3 1
+github.com/Macple/Bookings/cmd/web/middleware.go:24.50,26.2 1 1
+github.com/Macple/Bookings/cmd/web/routes.go:13.49,39.2 18 1
