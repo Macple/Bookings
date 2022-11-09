@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
+	"github.com/Macple/Bookings/internal/helpers"
 	"github.com/Macple/Bookings/internal/models"
 
 	"github.com/Macple/Bookings/internal/config"
@@ -19,6 +21,8 @@ const portNumber = ":8080"
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 // main is the main application function
 func main() {
@@ -43,6 +47,12 @@ func run() error {
 	// change this to true when in production
 	app.InProduction = false
 
+	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
+
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -60,10 +70,10 @@ func run() error {
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	render.NewTemplates(&app)
-
 	repo := handlers.NewRepo(&app)
+	render.NewTemplates(&app)
 	handlers.NewHandlers(repo)
+	helpers.NewHelpers(&app)
 
 	return nil
 }
