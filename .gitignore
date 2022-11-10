@@ -1,2 +1,5 @@
 coverage
 /internal/handlers/coverage/
+database.yml
+.idea
+.DS_Store
