@@ -8,11 +8,11 @@ import (
 	"os"
 	"time"
 
+	"github.com/Macple/Bookings/internal/config"
+	"github.com/Macple/Bookings/internal/driver"
+	"github.com/Macple/Bookings/internal/handlers"
 	"github.com/Macple/Bookings/internal/helpers"
 	"github.com/Macple/Bookings/internal/models"
-
-	"github.com/Macple/Bookings/internal/config"
-	"github.com/Macple/Bookings/internal/handlers"
 	"github.com/Macple/Bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
 )
@@ -26,10 +26,11 @@ var errorLog *log.Logger
 
 // main is the main application function
 func main() {
-	err := run()
+	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.SQL.Close()
 
 	srv := http.Server{
 		Addr:    portNumber,
@@ -41,9 +42,12 @@ func main() {
 	log.Fatal(err)
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 	// what can be put into the session
 	gob.Register(models.Reservation{})
+	gob.Register(models.User{})
+	gob.Register(models.Room{})
+	gob.Register(models.Restriction{})
 	// change this to true when in production
 	app.InProduction = false
 
@@ -61,19 +65,27 @@ func run() error {
 
 	app.Session = session
 
+	// connect to the database
+	log.Println("Connecting to the database...")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=postgres password=password")
+	if err != nil {
+		log.Fatal("Cannot connect to the database! Application Start Aborted!")
+	}
+	log.Println("Connected to the database!")
+
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("Can not create template cache")
-		return err
+		return nil, err
 	}
 
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	repo := handlers.NewRepo(&app)
-	render.NewTemplates(&app)
+	repo := handlers.NewRepo(&app, db)
+	render.NewRenderer(&app)
 	handlers.NewHandlers(repo)
 	helpers.NewHelpers(&app)
 
-	return nil
+	return db, nil
 }
