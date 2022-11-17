@@ -14,8 +14,8 @@ import (
 	"github.com/Macple/Bookings/internal/models"
 	"github.com/Macple/Bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
 	"github.com/justinas/nosurf"
 )
 
