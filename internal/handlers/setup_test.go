@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"testing"
 	"time"
 
 	"github.com/Macple/Bookings/internal/config"
@@ -24,7 +25,7 @@ var session *scs.SessionManager
 var pathToTemplates = "./../../templates"
 var functions = template.FuncMap{}
 
-func getRoutes() http.Handler {
+func TestMain(m *testing.M) {
 	gob.Register(models.Reservation{})
 	// change this to true when in production
 	app.InProduction = false
@@ -51,11 +52,15 @@ func getRoutes() http.Handler {
 	app.TemplateCache = tc
 	app.UseCache = true
 
-	repo := NewRepo(&app)
+	repo := NewTestRepo(&app)
 	NewHandlers(repo)
 	render.NewRenderer(&app)
 
-	mux := chi.NewMux()
+	os.Exit(m.Run())
+}
+
+func getRoutes() http.Handler {
+	mux := chi.NewRouter()
 
 	mux.Use(middleware.Recoverer)
 	//mux.Use(NoSurf)
