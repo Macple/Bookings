@@ -43,7 +43,7 @@ func (m *testDBRepo) SearchAvailibilityForAllRooms(start time.Time, end time.Tim
 func (m *testDBRepo) GetRoomByID(id int) (models.Room, error) {
 	var room models.Room
 	if id > 2 {
-		return room, errors.New("Invalid room ID")
+		return room, errors.New("invalid room ID")
 	}
 
 	return room, nil
