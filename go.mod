@@ -11,4 +11,5 @@ require (
 	github.com/jackc/pgx/v5 v5.0.4 // indirect
 	github.com/justinas/nosurf v1.1.1
 	github.com/xhit/go-simple-mail/v2 v2.13.0 // indirect
+	golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90 // indirect
 )
